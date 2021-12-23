@@ -16,25 +16,30 @@ const PrevButton = (props) => {
         position: "absolute",
         boxShadow: 2,
         top: "50%",
-        left: "0",
+        left: "-5%",
         zIndex: 1,
+        p:1
       }}
       color="primary"
-      startIcon={<ArrowBackIosIcon />}
       onClick={onClick}
-    ></Button>
-  );
+      >
+
+        <ArrowBackIosIcon />
+      </Button>
+      );
 };
 const NextButton = (props) => {
   const { onClick } = props;
   return (
     <Button
       variant="contained"
-      sx={{ position: "absolute", boxShadow: 2, top: "50%", right: "0" }}
+      sx={{ position: "absolute", boxShadow: 2, top: "50%", right: "-5%", p:1 }}
       color="primary"
-      startIcon={<ArrowForwardIosIcon />}
       onClick={onClick}
-    ></Button>
+      >
+
+        <ArrowForwardIosIcon />
+      </Button>
   );
 };
 

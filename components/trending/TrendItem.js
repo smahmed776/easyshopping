@@ -26,7 +26,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const TrendItem = ({ items, addItem, index }) => {
   const [expanded, setExpanded] = useState(false);
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);

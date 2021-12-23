@@ -1,9 +1,7 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Fragment } from "react";
 import Box from "@mui/material/Box"
 import Carousel from "../components/carousel/carousel";
-import Layout from "../components/layout/Layout";
 import Trending from "../components/trending/Trending"
 import Container from "@mui/material/Container";
 import FeaturedItem from "../components/Features/FeaturedItem";
@@ -17,7 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout>
+   
         <main>
         <Container>
           <Carousel />
@@ -27,7 +25,7 @@ export default function Home() {
           </Box>
         </Container>
         </main>
-      </Layout>
+     
     </Fragment>
   );
 }
