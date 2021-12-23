@@ -24,7 +24,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 
-const TrendItem = ({ items, addItem }) => {
+const TrendItem = ({ items, addItem, index }) => {
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(null);
 
