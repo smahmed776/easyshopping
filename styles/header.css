@@ -1,0 +1,387 @@
+#mobilenav {
+	display: none;
+}
+
+.showprofile {
+	display: flex!important;
+	bottom: 45px!important;
+	flex-direction: column;
+
+}
+
+.header {
+	width: auto;
+    background-color: white;
+    padding: 0px;
+    align-items: center;
+    box-shadow: 0 0 5px rgb(0 0 0 / 10%);
+    justify-content: space-between;
+}
+
+.h2 {
+	font-family: solaimanlipi;
+	color: black;
+	font-weight: bolder;
+	font-size: 17px;
+	font-style: italic;
+	width: 100%;
+	padding-left: 12px;
+}
+
+.h3 {
+	font-family: siyamrupali;
+	font-weight: lighter;
+	font-style: initial;
+	font-size: 12px;
+}
+.searchform {
+    width: 32%;
+    overflow: hidden;
+    padding: .5rem 1rem;
+}
+
+.searchform .input-group {
+	flex-wrap: nowrap;
+    /* border: 2px solid red; */
+    /* overflow: hidden; */
+    padding: 0;
+}
+.searchform .form-floating {
+	width: 85%;
+}
+
+.searchform .input-group-text {
+	width: 15%;
+}
+
+#searchfloating {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border: none;
+    background-color: #f5f5f5;
+
+}
+
+.searchlabel {
+	left: auto;
+}
+
+.navul {
+	width: 46vw;
+    justify-content: flex-end;
+}
+
+
+.navbar-expand-md {
+	justify-content: space-between;
+}
+.btntoggle {
+	border-color: rgba(0,0,0,.1);
+    margin-right: 14px;
+    height: 36px;
+    width: 12%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.bar1, .bar2, .bar3 {
+	width: 31px;
+    height: 2px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.change .bar1 {
+	-webkit-transform: rotate(-45deg) translate(-9px, 6px);
+	transform: rotate(-45deg) translate(-6px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+	-webkit-transform: rotate(45deg) translate(-8px, -8px);
+	transform: rotate(45deg) translate(-5px, -7px);
+}
+
+
+
+.navitem a:not(.cbutton)::after {
+	content: '';
+	display: block;
+	border-bottom: 1px solid black;
+	transform: scaleX(0);
+	transition: transform 250ms ease-in-out;
+	transform-origin: 0% 50%;
+}
+
+.navitem a:not(.cbutton):hover::after {
+	transform: scaleX(1);
+}
+.navitem a:hover {
+	cursor: pointer;
+}
+
+.cart {
+	background-size: cover;
+    height: 25px;
+    width: 25px;
+    padding-top: 1px;
+    margin-top: 2px;
+    color: white;
+    background-position: center center;
+    text-align: center;
+    justify-content: flex-end;
+}
+
+.dropdown-toggle::after {
+    content-visibility: hidden;
+    border: 0;
+}
+
+
+.mcart {
+	opacity: 1;
+}
+
+/* this is modal login page  */
+
+.mcontainer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100vh;
+	background-color: rgb(11 10 10 / 97%);
+	z-index: 1111;
+	width: 100%;
+	max-width: 100%;
+	opacity: 0;
+	transform: scale(0);
+	transition: all .7s ease;
+}
+
+.lcontainer {
+	position: relative;
+	width: 50%;
+	margin: 8% auto 15% auto;
+	border: 1px solid green;
+	background-color: rgb(205, 238, 157);
+	height: 70%;
+	padding: 1rem 2rem .5rem 2rem;
+}
+
+.lcontainer2 {
+	display: none;
+	position: relative;
+	width: 50%;
+	margin: 3% auto 15% auto;
+	border: 1px solid green;
+	background-color: rgb(205, 238, 157);
+	height: 80%;
+	padding: 1rem 2rem .5rem 2rem;
+	overflow: scroll;
+}
+
+/* .show {
+	top: 0;
+	transform: scale(1);
+	opacity: 1;
+} */
+
+.closemodal {
+	position: absolute; 
+	top: 2%;
+	right: 2%;
+	cursor: pointer;
+	padding: 5px 5px;
+	font-size: 2rem;
+}
+
+#passmsg{
+	display:none;
+	background: #f1f1f1;
+	color: #000;
+	position: relative;
+	padding: 20px;
+	margin-top: 10px;
+}
+
+#passmsg p {
+	padding: 10px 35px;
+	font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+	color: green;
+}
+
+.valid:before {
+	position: relative;
+    left: -35px;
+    content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+	color: red;
+}
+
+.invalid:before {
+	position: relative;
+    left: -35px;
+    content: "✖";
+}
+
+.passprog {
+	width: 200px;
+	background-color: gray;
+	height: 10px;
+}
+.progbar {
+	width: 0%;
+	height: 100%;
+	background-color: green;
+}
+
+
+/*============================================================
+this is media min width of 576px
+============================================================ */
+@media (min-width: 576px) { 
+	div.navbarbrand { 
+		width: 25%;
+		white-space: normal;
+		margin-right: .5rem;
+	}
+	h2 {
+		font-size: 19px;
+	}
+	
+	div.col img.img{
+		height: 80%;
+		width: 100%;
+	}
+	
+	.col img {
+		height: 176px;
+	}
+
+}
+
+
+@media (max-width: 576px) {
+	#mobilenav {
+		display: block;
+		border-top: 1px solid rgb(207, 207, 207);
+	}
+	.header {
+		background-color: rgb(247, 247, 247);
+	}
+	.navbarbrand{
+		width: 92%;
+	    white-space: normal;
+    }
+
+	.searchlabel {
+		left: 35px;
+	}
+	
+	.searchform, .btntoggle, .navbar-collapse {
+		display: none;
+	}
+
+	#searchfloating {
+		width: 195px;
+	}
+
+	.showsearch {
+		display: block!important;
+	}
+	.navul2 {
+		flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        height: 45px;
+	}
+
+	.nav-link {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.navitem a:not(.cbutton):hover {
+		color: currentColor;
+		font-size: 13px;
+		text-decoration: none;
+		border: none;
+		/* border-bottom: 1px solid #bbbbbbc7; */
+		background: none;
+	}
+
+	#btnnav {
+		padding: 3px 0px 0 20px;
+	}
+
+	.btntoggles {
+	    border: none;
+        margin-right: 0px;
+        height: 36px;
+        width: 100%;
+        padding: 0px 0px;
+        overflow: hidden;
+	}
+
+	.bar1, .bar2, .bar3 {
+		width: 24px;
+		height: 2px;
+		background-color: #333;
+		margin: 6px 0;
+		transition: 0.4s;
+	}
+
+
+	.lcontainer {
+		margin-top: 30%;
+		width: 85%;
+		overflow: scroll;
+	}
+
+	.lcontainer2 {
+		margin-top: 30%;
+		width: 85%;
+		overflow: scroll;
+	}
+
+	.cart {
+		padding-bottom: 16px;
+		padding-top: 0;
+		background-size: cover;
+		height: 18px;
+		width: 15px;
+		/* margin-top: 5px; */
+		color: white;
+		background-position: center center;
+		text-align: center;
+		justify-content: flex-end;
+		font-size: 12px;
+	}
+
+	.mcart {
+		display: none;
+		opacity: 0;
+	}
+	#cartButton {
+		width: 100%;
+		/* padding: 5px 1px; */
+		margin-top: 5px;
+		/* margin-left: 10px; */
+		height: 30px;
+		font-size: 14px;
+		padding: 0 0 2px 0;
+	}
+}
