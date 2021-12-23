@@ -143,7 +143,7 @@ const Footer = () => {
                       <Typography variant="h6" sx={{color:"white"}}>{i.name}</Typography>
                       <ul className="navbar-nav" key={index}>
                         {i.sub.map((i, index) => (
-                          <li style={{ listStyleType: "none", padding: ".5rem" }}>
+                          <li style={{ listStyleType: "none", padding: ".5rem" }} key={index}>
                             <Link
                               href="#"
                               variant="body2"
