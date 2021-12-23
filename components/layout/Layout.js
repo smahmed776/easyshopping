@@ -137,7 +137,8 @@ const Layout = ({ children }) => {
                 <MailIcon />
               </Badge>
             </IconButton>
-            <a href="/cart" passHref>
+            <Link href="/cart" passHref>
+              <a>
               <IconButton
                 size="large"
                 aria-label="show 17 new notifications"
@@ -148,6 +149,7 @@ const Layout = ({ children }) => {
                 </Badge>
               </IconButton>
             </a>
+            </Link>
             <IconButton
               size="large"
               edge="end"
