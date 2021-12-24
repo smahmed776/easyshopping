@@ -20,10 +20,13 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import {useCart} from "../custom hooks/cartHook"
 
 const Layout = ({ children }) => {
+  const [cartCount, setCartCount] = useState(0)
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const {itemCount} = useCart();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -89,6 +92,10 @@ const Layout = ({ children }) => {
 
   const mobileMenuId = "primary-search-account-menu-mobile";
 
+  useEffect(()=> {
+    setCartCount(itemCount)
+  }, [itemCount])
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky">
@@ -141,10 +148,10 @@ const Layout = ({ children }) => {
               <a>
               <IconButton
                 size="large"
-                aria-label="show 17 new notifications"
+                aria-label={`show ${cartCount} new notifications`}
                 color="inherit"
               >
-                <Badge badgeContent={0} color="error">
+                <Badge badgeContent={cartCount} color="error">
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>

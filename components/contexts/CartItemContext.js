@@ -1,5 +1,5 @@
-import React, { createContext, useReducer} from 'react'
-import { CartReducer, sumItems} from "../reducers/CartReducer"
+import React, { createContext, useReducer, useState, useEffect} from 'react'
+import { CartReducer, sumItems} from "../reducers/CartReducer";
 
 
 
@@ -15,8 +15,9 @@ export const ACTIONS = {
 
 
 export const CartItemProvider = props => {
-    const arr = localStorage.getItem('cart')? JSON.parse(localStorage.getItem('cart')): []
-    
+
+    const arr = typeof window !== "undefined" ? localStorage?.getItem('cart') && JSON.parse(localStorage.getItem('cart')): []
+   
     const initialState = {cartItem: arr, ...sumItems(arr)}
 
     const [state, dispatch] = useReducer(CartReducer, initialState)
@@ -39,7 +40,11 @@ export const CartItemProvider = props => {
         addItem,
         ...state
     }
-
+    // useEffect(()=>{
+    //     if(typeof window !== "undefined"){
+    //         setArr(localStorage?.getItem('cart')? JSON.parse(localStorage.getItem('cart')): [])
+    //     }
+    // }, [])
     return (
         <CartItemContext.Provider value={CartContextValue}>
             {props.children}

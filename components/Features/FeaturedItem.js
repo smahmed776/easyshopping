@@ -4,11 +4,10 @@ import TrendItem from '../trending/TrendItem';
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Box, Button, Typography } from '@mui/material';
+import { useCart } from "../custom hooks/cartHook"
 
 const FeaturedItem = () => {
-    const addItem = () => {
-        return
-    }
+   const { addItem } = useCart()
 
     const items = [
         {
@@ -26,7 +25,7 @@ const FeaturedItem = () => {
             "spec": {},
             "price_string": "$28.99",
             "price_symbol": "$",
-            "price": 28.99
+            "price": 28.99,
         },
         {
             "type": "search_product",

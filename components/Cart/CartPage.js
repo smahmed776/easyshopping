@@ -2,10 +2,12 @@ import React from "react";
 import { Box, Grid, Container, Typography } from "@mui/material";
 import SingleItem from "./SingleItem";
 import AddressCol from "./AddressCol";
+import {useCart} from "../custom hooks/cartHook"
 
 const CartPage = () => {
+  const {cartItem} = useCart()
   return (
-    <Box sx={{ padding: { xs: 0, md: 3 } }}>
+    <Box sx={{ padding: { xs: 1, md: 3 } }}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={7} sx={{ px: 1 }}>
           <Container
@@ -22,7 +24,12 @@ const CartPage = () => {
               <Typography variant="body2">Price</Typography>
             </Grid>
           </Container>
-          <SingleItem />
+          {cartItem?.length > 0 && cartItem.map((item, index)=> (
+
+          <SingleItem index={index} key={index} item={item} cartItem={cartItem} />
+          ))
+
+          }
         </Grid>
 
         <Grid item xs={12} md={5}>

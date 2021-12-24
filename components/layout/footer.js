@@ -148,7 +148,7 @@ const Footer = () => {
           <Grid
             container
             spacing={3}
-            sx={{ justifyContent: "space-around", p: 1 }}
+            sx={{ justifyContent: "flex-start", p: 1 }}
           >
             {FooterLinks.map((i, index) => (
               <Grid item key={index}>

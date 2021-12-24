@@ -24,6 +24,9 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 
+
+
+
 const TrendItem = ({ items, addItem, index }) => {
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
@@ -156,7 +159,7 @@ const TrendItem = ({ items, addItem, index }) => {
             </IconButton>
           </Tooltip>
           <Tooltip arrow title="Add to cart">
-            <Button variant="contained" size="small" sx={{ p: 1 }}>
+            <Button onClick={()=> addItem(items)} variant="contained" size="small" sx={{ p: 1 }}>
               <ShoppingCartIcon />
             </Button>
           </Tooltip>
