@@ -1,8 +1,8 @@
 import React from 'react';
-import {Container, Grid, Typography, Divider, IconButton, Button} from "@mui/material";
+import {Container, Grid, Typography, Divider, IconButton, Button, List, ListItem, ListItemText} from "@mui/material";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 
-const AddressCol = () => {
+const AddressCol = ({cartItem}) => {
     return (
         <Container
         sx={{
@@ -12,6 +12,16 @@ const AddressCol = () => {
         }}
       >
         <Grid container>
+          <Grid item xs={12}>
+            <List>
+              <ListItem secondaryAction={<Typography variant="body2" sx={{color: "secondary.main"}}>{cartItem.reduce((total, item)=> total + item.quantity, 0)}</Typography>}>
+                <ListItemText>Total Product:</ListItemText>
+              </ListItem>
+              <ListItem secondaryAction={<Typography variant="body2" sx={{color: "secondary.main"}}>{cartItem.reduce((total, item )=> total + item.price * item.quantity, 0)}</Typography>}>
+                <ListItemText>Total Price:</ListItemText>
+              </ListItem>
+            </List>
+          </Grid>
           <Grid item xs={12}>
             <Typography variant="body2">Shipping Address:</Typography>
             <Grid container spacing={1}>

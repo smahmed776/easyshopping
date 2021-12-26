@@ -28,7 +28,7 @@ export const CartReducer = (state, action) => {
   switch (action.type) {
     case ACTIONS.INCREASE:
       state.cartItem[
-        state.cartItem?.findIndex((state) => state.sno === action.payload.sno)
+        state.cartItem?.findIndex((state) => state.name === action.payload.name)
       ].quantity++;
       return {
         ...state,
@@ -36,14 +36,8 @@ export const CartReducer = (state, action) => {
       };
     case ACTIONS.DECREASE:
       state.cartItem[
-        state.cartItem.findIndex((state) => state.sno === action.payload.sno)
-      ].quantity === 1
-        ? console.log("cant decrease")
-        : state.cartItem[
-            state.cartItem.findIndex(
-              (state) => state.sno === action.payload.sno
-            )
-          ].quantity--;
+        state.cartItem.findIndex((state) => state.name === action.payload.name)
+      ].quantity-- ;
       return {
         ...state,
         ...sumItems(state.cartItem),

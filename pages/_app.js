@@ -15,7 +15,7 @@ export default function MyApp(props) {
   return (
     <Fragment>
       <Head>
-        <title>My page</title>
+        <title>EasyShopping - shopping got easy!</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>

@@ -4,11 +4,10 @@ import TrendItem from "./TrendItem";
 import { Button, Box, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useCart } from "../custom hooks/cartHook";
 
 const Trending = () => {
-  const addItem = (id) => {
-    return;
-  };
+  const {addItem} = useCart()
 
   const trending = [
     {

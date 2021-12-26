@@ -30,10 +30,21 @@ const CartPage = () => {
           ))
 
           }
+          {
+            cartItem.length === 0 && (
+              <Container>
+                <Box sx={{p:3 , display: "flex", justifyContent: "center", alignItems: "center"}}>
+                  <Typography variant="body2" sx={{color: "error.main"}}>
+                    Opps! your cart is empty !
+                  </Typography>
+                </Box>
+              </Container>
+            )
+          }
         </Grid>
 
         <Grid item xs={12} md={5}>
-          <AddressCol />
+          <AddressCol cartItem={cartItem}/>
         </Grid>
       </Grid>
     </Box>
