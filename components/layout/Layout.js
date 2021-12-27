@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { forwardRef, useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Footer from "./footer";
 import { styled, alpha } from "@mui/material/styles";
@@ -12,6 +12,8 @@ import {
   Badge,
   MenuItem,
   Menu,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -21,12 +23,18 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {useCart} from "../custom hooks/cartHook"
+import AppDrawer from "./AppDrawer";
+
+
 
 const Layout = ({ children }) => {
+  const [openDrawer, setOpenDrawer] = useState(false)
   const [cartCount, setCartCount] = useState(0)
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const {itemCount} = useCart();
+  const {itemCount, openToastContext, toastTextContext} = useCart();
+  const [openToast] = openToastContext;
+  const [toastText] = toastTextContext;
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -106,10 +114,11 @@ const Layout = ({ children }) => {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2, display: { lg: "none", sm: "block" } }}
+            onClick={()=> setOpenDrawer(true)}
           >
             <MenuIcon />
           </IconButton>
-          <Link href="/" passHref>
+          <Link href="/">
             <a>
               <Typography
                 variant="h6"
@@ -120,7 +129,7 @@ const Layout = ({ children }) => {
                   fontFamily: "siyamrupali",
                 }}
               >
-                EasyShopping
+                easyShopping
               </Typography>
             </a>
           </Link>
@@ -144,7 +153,7 @@ const Layout = ({ children }) => {
                 <MailIcon />
               </Badge>
             </IconButton>
-            <Link href="/cart" passHref>
+            <Link href="/cart" >
               <a>
               <IconButton
                 size="large"
@@ -209,16 +218,21 @@ const Layout = ({ children }) => {
           <p>Messages</p>
         </MenuItem>
         <MenuItem>
-          <IconButton
-            size="large"
-            aria-label="show 17 new notifications"
-            color="inherit"
-          >
-            <Badge badgeContent={17} color="error">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <p>Notifications</p>
+        <Link href="/cart" >
+              <a>
+              <IconButton
+                size="large"
+                aria-label={`show ${cartCount} new notifications`}
+                color="inherit"
+              >
+                <Badge badgeContent={cartCount} color="error">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+          <span>Cart</span>
+            </a>
+            </Link>
+         
         </MenuItem>
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton
@@ -272,7 +286,16 @@ const Layout = ({ children }) => {
         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
         <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       </Menu>
+      <AppDrawer openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
+      <div style={{backgroundColor: "rgba(0,0,0,0.02)"}}>
+
       {children}
+      <Snackbar open={openToast} autoHideDuration={6000}>
+        <Alert severity="success" sx={{bgcolor: "success.main", color: "white", width: '100%' }}>
+          {toastText}
+        </Alert>
+      </Snackbar>
+      </div>
       <Footer />
     </Box>
   );

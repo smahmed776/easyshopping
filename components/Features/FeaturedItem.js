@@ -7,7 +7,9 @@ import { Box, Button, Typography } from '@mui/material';
 import { useCart } from "../custom hooks/cartHook"
 
 const FeaturedItem = () => {
-   const { addItem } = useCart()
+  const {cartItem, addItem, openToastContext, toastTextContext } = useCart();
+  const [openToast, setOpenToast] = openToastContext;
+  const [toastText, setToastText] = toastTextContext;
 
     const items = [
         {
@@ -512,7 +514,7 @@ const FeaturedItem = () => {
           ]}
         >
           {items.map((item, index) => (
-            <TrendItem items={item} addItem={addItem} key={index}/>
+            <TrendItem cartItem={cartItem} items={item} addItem={addItem} key={index} setOpenToast={setOpenToast} setToastText={setToastText}/>
           ))}
         </Slider>
       </Box>

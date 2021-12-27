@@ -15,6 +15,8 @@ export const ACTIONS = {
 
 
 export const CartItemProvider = props => {
+    const [openToast, setOpenToast] = useState(false);
+    const [toastText, setToastText] = useState("")
 
     const arr = typeof window !== "undefined" ? localStorage?.getItem('cart') && JSON.parse(localStorage.getItem('cart')): []
    
@@ -33,18 +35,29 @@ export const CartItemProvider = props => {
     const decrease = payload => {
         dispatch({type: ACTIONS.DECREASE, payload})
     }
+    const showToast = payload => {
+        setOpenToast(payload.open)
+        setToastText(payload.text)
+    }
     const CartContextValue = {
         removeItem, 
         increase,
         decrease, 
         addItem,
+        showToast,
+        openToastContext: [openToast, setOpenToast],
+        toastTextContext: [toastText, setToastText],
         ...state
     }
-    // useEffect(()=>{
-    //     if(typeof window !== "undefined"){
-    //         setArr(localStorage?.getItem('cart')? JSON.parse(localStorage.getItem('cart')): [])
-    //     }
-    // }, [])
+
+    useEffect(()=>{
+        if(openToast){
+            setTimeout(() => {
+                setOpenToast(prev => !prev)
+            }, 4000);
+        }
+    }, [openToast])
+
     return (
         <CartItemContext.Provider value={CartContextValue}>
             {props.children}

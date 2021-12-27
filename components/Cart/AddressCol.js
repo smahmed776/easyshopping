@@ -1,6 +1,7 @@
 import React from 'react';
 import {Container, Grid, Typography, Divider, IconButton, Button, List, ListItem, ListItemText} from "@mui/material";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
+import Link from 'next/link';
 
 const AddressCol = ({cartItem}) => {
     return (
@@ -71,9 +72,11 @@ const AddressCol = ({cartItem}) => {
           }}
         />
         <div style={{padding: "1rem"}}>
-            <Button variant="contained" sx={{width: "100%"}}>
+          <Link href="/cart/checkout">
+            <Button variant="contained" disabled={cartItem.length > 0 ? false : true} sx={{width: "100%"}}>
                 Proceed to Checkout
             </Button>
+          </Link>
         </div>
       </Container>
     )

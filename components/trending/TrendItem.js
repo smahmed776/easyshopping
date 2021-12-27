@@ -23,12 +23,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
-import { useCart } from "../custom hooks/cartHook";
 
 
 
 
-const TrendItem = ({ items, addItem, index }) => {
+const TrendItem = ({cartItem, items, addItem, index, setOpenToast, setToastText }) => {
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -160,7 +159,11 @@ const TrendItem = ({ items, addItem, index }) => {
             </IconButton>
           </Tooltip>
           <Tooltip arrow title="Add to cart">
-            <Button onClick={()=> addItem(items)} variant="contained" size="small" sx={{ p: 1 }}>
+            <Button onClick={()=> {
+              addItem(items);
+              setOpenToast(true);
+              setToastText(`${cartItem.length} item added to cart`)
+              }} variant="contained" size="small" sx={{ p: 1 }}>
               <ShoppingCartIcon />
             </Button>
           </Tooltip>

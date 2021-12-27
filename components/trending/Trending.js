@@ -7,7 +7,9 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useCart } from "../custom hooks/cartHook";
 
 const Trending = () => {
-  const {addItem} = useCart()
+  const {cartItem, addItem, openToastContext, toastTextContext } = useCart();
+  const [openToast, setOpenToast] = openToastContext;
+  const [toastText, setToastText] = toastTextContext;
 
   const trending = [
     {
@@ -317,7 +319,7 @@ const Trending = () => {
           ]}
         >
           {trending.map((item, index) => (
-            <TrendItem items={item} index={index} key={index} addItem={addItem} />
+            <TrendItem cartItem={cartItem} items={item} index={index} key={index} addItem={addItem} setOpenToast={setOpenToast} setToastText={setToastText} />
           ))}
         </Slider>
       </Box>

@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import Head from "next/head";
-import CartPage from "../components/Cart/CartPage"
+import CartPage from "../../components/Cart/CartPage"
 
 export default function cartHandler (){
     return (

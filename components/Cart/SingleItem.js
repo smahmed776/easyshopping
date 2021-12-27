@@ -6,7 +6,8 @@ import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
 import RemoveCircleSharpIcon from '@mui/icons-material/RemoveCircleSharp';
 
 const SingleItem = ({item, index, cartItem }) => {
-  const {removeItem, increase, decrease } = useCart()
+  const {removeItem, increase, decrease  } = useCart();
+  
   const [mounted, setMounted] = useState(false);
   const CustomContainer = styled(Container)(({ theme }) => ({
     "&.MuiContainer-root": {
@@ -59,7 +60,7 @@ const SingleItem = ({item, index, cartItem }) => {
             p: 1,
           }}
         >
-          <Grid item xs={12} sm={7} sx={{pr:2}}>
+          <Grid item xs={12} sm={6} sx={{pr:2}}>
             <Grid container spacing={1}>
               <Grid item>
                 <img src={item.image} style={{ height: "45px", width: "45px" }} />
@@ -69,7 +70,7 @@ const SingleItem = ({item, index, cartItem }) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={6} sm={4}>
             <IncreaQuantity>
               <Tooltip title="increase quantity">
 
@@ -91,7 +92,7 @@ const SingleItem = ({item, index, cartItem }) => {
             </IncreaQuantity>
           </Grid>
           <Grid item xs={12} sm={2}>
-            <Typography align="center" sx={{width: "10ch", overflow: "hidden"}}>{`$${item.price * item.quantity}`}</Typography>
+            <Typography align="center" sx={{overflow: "hidden"}}>{`$${item.price * item.quantity}`}</Typography>
           </Grid>
         </Grid>
       </CustomContainer>
