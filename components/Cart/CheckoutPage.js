@@ -23,6 +23,7 @@ import PaymentSharpIcon from "@mui/icons-material/PaymentSharp";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import { useCart } from "../custom hooks/cartHook";
 
 const steps = [
   {
@@ -45,7 +46,8 @@ const steps = [
   },
 ];
 
-const CheckoutPage = ({ cartItem }) => {
+const CheckoutPage = () => {
+    const {cartItem} = useCart()
   const [activeStep, setActiveStep] = useState(0);
   const [totalAmount, setTotalAmount] = useState(() =>
     cartItem.reduce((total, item) => total + item.price * item.quantity, 0)
