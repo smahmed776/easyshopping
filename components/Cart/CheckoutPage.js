@@ -17,6 +17,7 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton"
 import PlaceSharpIcon from "@mui/icons-material/PlaceSharp";
 import ShoppingCartCheckoutSharpIcon from "@mui/icons-material/ShoppingCartCheckoutSharp";
 import PaymentSharpIcon from "@mui/icons-material/PaymentSharp";
@@ -24,50 +25,19 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import { useCart } from "../custom hooks/cartHook";
-
-const steps = [
-  {
-    label: "Delivary Address",
-    description: `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`,
-  },
-  {
-    label: "Create an ad group",
-    description:
-      "An ad group contains one or more ads which target a shared set of keywords.",
-  },
-  {
-    label: "Create an ad",
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
-  },
-];
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
 const CheckoutPage = () => {
-    const {cartItem} = useCart()
-  const [activeStep, setActiveStep] = useState(0);
+  const { cartItem } = useCart();
   const [totalAmount, setTotalAmount] = useState(() =>
     cartItem.reduce((total, item) => total + item.price * item.quantity, 0)
   );
-  const [discount, setDiscount] = useState(10);
+  const [discount, setDiscount] = useState(0);
   const [finalPrice, setFinalPrice] = useState(
     () => totalAmount - (totalAmount * discount) / 100
   );
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
+  const [loading, setLoading] = useState(false);
 
   const DeliveryAddressIcon = () => {
     return (
@@ -91,6 +61,29 @@ const CheckoutPage = () => {
         <PaymentSharpIcon />
       </IconButton>
     );
+  };
+
+  const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY;
+
+  const stripePromise = loadStripe(publishableKey);
+  const createCheckOutSession = async () => {
+    try {
+      setLoading(true);
+      const stripe = await stripePromise;
+      const checkoutSession = await axios.post("/api/create-stripe-session", {
+        items: cartItem.length > 0 ? cartItem : [],
+      });
+
+      const result = await stripe.redirectToCheckout({
+        sessionId: checkoutSession.data.id,
+      });
+      if (result.error) {
+        alert(result.error.message);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
 
   return (
@@ -198,7 +191,7 @@ const CheckoutPage = () => {
                               alignItems: "center",
                               width: "100%",
                               borderBottom: 1,
-                              borderColor: "rgba(0,0,0,0.1)"
+                              borderColor: "rgba(0,0,0,0.1)",
                             }}
                           >
                             <img
@@ -230,18 +223,28 @@ const CheckoutPage = () => {
                     </Box>
                   </StepContent>
                 </Step>
-                <Step>
+                <Step active={true}>
                   <StepLabel StepIconComponent={PaymentIcon}>
                     Payment Details
                   </StepLabel>
                   <StepContent>
-                    <Typography>Delivery</Typography>
+                    <LoadingButton
+                      onClick={createCheckOutSession}
+                      startIcon={<PaymentSharpIcon />}
+                      loading={loading}
+                      loadingPosition="start"
+                      variant="contained"
+                    >
+                      Buy Product
+                    </LoadingButton>
                   </StepContent>
                 </Step>
               </Stepper>
             </Box>
           </Paper>
         </Grid>
+
+        {/* Price details  */}
 
         <Grid item xs={12} sm={4}>
           <Paper sx={{ borderTop: 2, borderColor: "primary.main" }}>
