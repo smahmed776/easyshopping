@@ -17,12 +17,12 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import LoadingButton from "@mui/lab/LoadingButton"
-import PlaceSharpIcon from "@mui/icons-material/PlaceSharp";
-import ShoppingCartCheckoutSharpIcon from "@mui/icons-material/ShoppingCartCheckoutSharp";
-import PaymentSharpIcon from "@mui/icons-material/PaymentSharp";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
+import LoadingButton from "@mui/lab/LoadingButton";
+import PlaceSharpIcon from '@mui/icons-material/PlaceSharp';
+import ShoppingCartCheckoutSharpIcon from '@mui/icons-material/ShoppingCartCheckoutSharp';
+import PaymentSharpIcon from '@mui/icons-material/PaymentSharp';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import { useCart } from "../custom hooks/cartHook";
 import { loadStripe } from "@stripe/stripe-js";

@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import {Container, Grid, Typography, Divider, IconButton, Button, List, ListItem, ListItemText} from "@mui/material";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import Link from 'next/link';
 
 const AddressCol = ({cartItem}) => {
+  const [disable, setDisable] = useState(Boolean);
+  useEffect(()=>{
+    if(cartItem.length > 0){
+      console.log("disable false")
+      setDisable(false)
+    } else {
+      console.log("disable true")
+      setDisable(true)
+    }
+  }, [cartItem])
     return (
         <Container
         sx={{
           border: 1,
+          borderTop: 3,
           borderColor: "#dee2e6",
+          borderTopColor: "primary.main",
           p: 1,
+          borderTopLeftRadius: "8px",
+          borderTopRightRadius: "8px"
         }}
       >
         <Grid container>
@@ -73,7 +87,7 @@ const AddressCol = ({cartItem}) => {
         />
         <div style={{padding: "1rem"}}>
           <Link href="/cart/checkout">
-            <Button variant="contained" disabled={cartItem.length > 0 ? false : true} sx={{width: "100%"}}>
+            <Button variant="contained" disabled={disable} sx={{width: "100%"}}>
                 Proceed to Checkout
             </Button>
           </Link>

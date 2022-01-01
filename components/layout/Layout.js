@@ -24,6 +24,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {useCart} from "../custom hooks/cartHook"
 import AppDrawer from "./AppDrawer";
+import BreadCrumb from "./BreadCrumb";
 
 
 
@@ -288,7 +289,7 @@ const Layout = ({ children }) => {
       </Menu>
       <AppDrawer openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
       <div style={{backgroundColor: "rgba(0,0,0,0.02)"}}>
-
+        <BreadCrumb />
       {children}
       <Snackbar open={openToast} autoHideDuration={6000}>
         <Alert severity="success" sx={{bgcolor: "success.main", color: "white", width: '100%' }}>
