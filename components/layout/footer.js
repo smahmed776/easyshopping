@@ -110,7 +110,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-white border-top mt-2">
-      <Box sx={{ bgcolor: "primary.main" }}>
+      <Box sx={{ bgcolor: "primary.dark" }}>
         <Container>
           <Box
             flexDirection={"column"}

@@ -10,30 +10,39 @@ const BreadCrumb = () => {
 
   useEffect(() => {
     const paths = pathname.split("/");
-    setBreadCrumbs([])
+    setBreadCrumbs([]);
     paths.forEach((path) => {
       if (path !== "") {
         setBreadCrumbs((prev) => {
-          if(prev.length > 0){
-            
-            return [...prev, {title: `${path.charAt(0).toUpperCase()}${path.slice(1)}`, url: `/${prev[0].url.replace("/", '')}/${path}`}]
+          if (prev.length > 0) {
+            return [
+              ...prev,
+              {
+                title: `${path.charAt(0).toUpperCase()}${path.slice(1)}`,
+                url: `/${prev[0].url.replace("/", "")}/${path}`,
+              },
+            ];
           }
-         return [...prev, { title:`${path.charAt(0).toUpperCase()}${path.slice(1)}`, url: `/${path}` }]
-         });
+          return [
+            ...prev,
+            {
+              title: `${path.charAt(0).toUpperCase()}${path.slice(1)}`,
+              url: `/${path}`,
+            },
+          ];
+        });
       }
     });
   }, [pathname]);
-  return (
-    <Box sx={{p:2}}>
-      <Breadcrumbs separator={<ChevronRight fontSize="small" />}>
-        {breadCrumbs.length > 0 && (
+  if (breadCrumbs.length > 0) {
+    return (
+      <Box sx={{ p: 2 }}>
+        <Breadcrumbs separator={<ChevronRight fontSize="small" />}>
           <Link href="/" sx={{ color: "primary.main" }} passHref>
             <a>Home</a>
           </Link>
-        )}
 
-        {breadCrumbs.length > 0 &&
-          breadCrumbs.map((nav) => (
+          {breadCrumbs.map((nav) => (
             <Link
               href={nav.url}
               sx={{ color: "primary.main" }}
@@ -43,9 +52,11 @@ const BreadCrumb = () => {
               <a>{nav.title}</a>
             </Link>
           ))}
-      </Breadcrumbs>
-    </Box>
-  );
+        </Breadcrumbs>
+      </Box>
+    );
+  }
+  return <div></div>;
 };
 
 export default BreadCrumb;

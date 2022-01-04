@@ -7,10 +7,8 @@ const AddressCol = ({cartItem}) => {
   const [disable, setDisable] = useState(Boolean);
   useEffect(()=>{
     if(cartItem.length > 0){
-      console.log("disable false")
       setDisable(false)
     } else {
-      console.log("disable true")
       setDisable(true)
     }
   }, [cartItem])

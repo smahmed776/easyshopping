@@ -6,6 +6,7 @@ import {
   AppBar,
   Box,
   Toolbar,
+  Button,
   IconButton,
   Typography,
   InputBase,
@@ -18,22 +19,23 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
+import RedeemIcon from "@mui/icons-material/Redeem";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import {useCart} from "../custom hooks/cartHook"
+import { useCart } from "../custom hooks/cartHook";
 import AppDrawer from "./AppDrawer";
 import BreadCrumb from "./BreadCrumb";
-
-
+import CustomIconButton from "../atoms/CustomIconButton";
+import HeadsetMicIcon from "@mui/icons-material/HeadsetMic";
+import PlaceSharpIcon from "@mui/icons-material/PlaceSharp";
 
 const Layout = ({ children }) => {
-  const [openDrawer, setOpenDrawer] = useState(false)
-  const [cartCount, setCartCount] = useState(0)
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const {itemCount, openToastContext, toastTextContext} = useCart();
+  const { itemCount, openToastContext, toastTextContext } = useCart();
   const [openToast] = openToastContext;
   const [toastText] = toastTextContext;
 
@@ -41,7 +43,12 @@ const Layout = ({ children }) => {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const Search = styled("div")(({ theme }) => ({
+    height: "50%",
+    display: "flex",
+    justifyContent: "flex-start",
     position: "relative",
+    border: "1px solid",
+    borderColor: "rgba(0, 0, 0, 0.08)",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
@@ -52,30 +59,32 @@ const Layout = ({ children }) => {
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
-      width: "auto",
+      width: "100%",
     },
   }));
 
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
+  const SearchIconWrapper = styled(IconButton)(({ theme }) => ({
     height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
+    width: "45px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    borderRight: "1px solid rgba(0,0,0,0.08)",
+    backgroundColor: "rgba(0,0,0,0.09)",
+    borderRadius: 0,
   }));
 
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
+    width: "100%",
     "& .MuiInputBase-input": {
       padding: theme.spacing(1, 1, 1, 0),
       // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      paddingLeft: theme.spacing(1),
       transition: theme.transitions.create("width"),
       width: "100%",
       [theme.breakpoints.up("md")]: {
-        width: "20ch",
+        width: "100%",
       },
     },
   }));
@@ -101,21 +110,73 @@ const Layout = ({ children }) => {
 
   const mobileMenuId = "primary-search-account-menu-mobile";
 
-  useEffect(()=> {
-    setCartCount(itemCount)
-  }, [itemCount])
+  useEffect(() => {
+    setCartCount(itemCount);
+  }, [itemCount]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="sticky">
-        <Toolbar>
+      <Box
+        sx={{
+          bgcolor: "secondary.light",
+          p: 1,
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+          color: "text.muted",
+          flexWrap: 'wrap'
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <IconButton sx={{ color: "primary.main" }}>
+            <HeadsetMicIcon />
+          </IconButton>
+          <Typography variant="subtitle2">Call us at - + 88017XXXXXX</Typography>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <IconButton sx={{ color: "primary.main" }}>
+            <PlaceSharpIcon />
+          </IconButton>
+          <Typography variant="subtitle2">
+            Acme Widgets 123 Widget Street Acmeville, AC 12345
+          </Typography>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Button>Sign In</Button>
+          <Typography sx={{p:1}}>or</Typography>
+          <Button>Sign Up</Button>
+        </div>
+      </Box>
+      <AppBar
+        position="sticky"
+        sx={{ bgcolor: "white", color: "black", boxShadow: 0 }}
+      >
+        <Toolbar sx={{ alignItems: "center", height: "75px" }}>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2, display: { lg: "none", sm: "block" } }}
-            onClick={()=> setOpenDrawer(true)}
+            onClick={() => setOpenDrawer(true)}
           >
             <MenuIcon />
           </IconButton>
@@ -127,10 +188,10 @@ const Layout = ({ children }) => {
                 component="div"
                 sx={{
                   display: { xs: "none", sm: "block" },
-                  fontFamily: "siyamrupali",
+                  fontFamily: "serif",
                 }}
               >
-                easyShopping
+                EasyShopping
               </Typography>
             </a>
           </Link>
@@ -144,40 +205,27 @@ const Layout = ({ children }) => {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
+          <Box sx={{ display: { xs: "flex", } }}>
+            <CustomIconButton size="medium" sx={{display: {xs: "none", md: "flex"}}}>
               <Badge badgeContent={4} color="error">
-                <MailIcon />
+                <RedeemIcon />
               </Badge>
-            </IconButton>
-            <Link href="/cart" >
+            </CustomIconButton>
+            <Link href="/cart">
               <a>
-              <IconButton
-                size="large"
-                aria-label={`show ${cartCount} new notifications`}
-                color="inherit"
-              >
-                <Badge badgeContent={cartCount} color="error">
-                  <ShoppingCartIcon />
-                </Badge>
-              </IconButton>
-            </a>
+                <CustomIconButton
+                  size="medium"
+                  aria-label={`show ${cartCount} new notifications`}
+                  sx={{ mx: 1 }}
+                >
+                  <Badge badgeContent={cartCount} color="error">
+                    <ShoppingCartIcon />
+                  </Badge>
+                </CustomIconButton>
+              </a>
             </Link>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          {/* <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="show more"
@@ -188,7 +236,7 @@ const Layout = ({ children }) => {
             >
               <MoreIcon />
             </IconButton>
-          </Box>
+          </Box> */}
         </Toolbar>
       </AppBar>
       <Menu
@@ -213,14 +261,14 @@ const Layout = ({ children }) => {
             color="inherit"
           >
             <Badge badgeContent={4} color="error">
-              <MailIcon />
+              <RedeemIcon />
             </Badge>
           </IconButton>
           <p>Messages</p>
         </MenuItem>
         <MenuItem>
-        <Link href="/cart" >
-              <a>
+          <Link href="/cart">
+            <a>
               <IconButton
                 size="large"
                 aria-label={`show ${cartCount} new notifications`}
@@ -230,10 +278,9 @@ const Layout = ({ children }) => {
                   <ShoppingCartIcon />
                 </Badge>
               </IconButton>
-          <span>Cart</span>
+              <span>Cart</span>
             </a>
-            </Link>
-         
+          </Link>
         </MenuItem>
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton
@@ -288,14 +335,17 @@ const Layout = ({ children }) => {
         <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       </Menu>
       <AppDrawer openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
-      <div style={{backgroundColor: "rgba(0,0,0,0.02)"}}>
+      <div style={{ backgroundColor: "rgba(0,0,0,0.02)" }}>
         <BreadCrumb />
-      {children}
-      <Snackbar open={openToast} autoHideDuration={6000}>
-        <Alert severity="success" sx={{bgcolor: "success.main", color: "white", width: '100%' }}>
-          {toastText}
-        </Alert>
-      </Snackbar>
+        {children}
+        <Snackbar open={openToast} autoHideDuration={6000}>
+          <Alert
+            severity="success"
+            sx={{ bgcolor: "success.main", color: "white", width: "100%" }}
+          >
+            {toastText}
+          </Alert>
+        </Snackbar>
       </div>
       <Footer />
     </Box>

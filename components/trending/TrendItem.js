@@ -163,7 +163,7 @@ const TrendItem = ({cartItem, items, addItem, index, setOpenToast, setToastText 
               addItem(items);
               setOpenToast(true);
               setToastText(`${cartItem.length} item added to cart`)
-              }} variant="contained" size="small" sx={{ p: 1 }}>
+              }} variant="contained" size="small" sx={{ p: 1, color: "white", bgcolor: "primary.main" }}>
               <ShoppingCartIcon />
             </Button>
           </Tooltip>

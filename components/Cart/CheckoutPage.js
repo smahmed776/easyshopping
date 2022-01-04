@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Box,
@@ -13,6 +13,7 @@ import {
   IconButton,
   Divider,
   Card,
+  InputBase,
   List,
   ListItem,
   ListItemText,
@@ -71,7 +72,13 @@ const CheckoutPage = () => {
       setLoading(true);
       const stripe = await stripePromise;
       const checkoutSession = await axios.post("/api/create-stripe-session", {
-        items: cartItem.length > 0 ? cartItem : [],
+        items: cartItem.length > 0 ? cartItem.map(item=> ({
+          price: finalPrice,
+          image: item.image,
+          name: item.name,
+          description: item.description,
+          quantity: item.quantity
+        })) : [],
       });
 
       const result = await stripe.redirectToCheckout({
@@ -85,6 +92,22 @@ const CheckoutPage = () => {
       console.log(error);
     }
   };
+
+  const coupon = [{text: "twenty", discount: 20}, {text: "ten", discount: 10}, {text: "tfive", discount: 25}, {text:"nineFive", discount: 95}]
+  const checkCoupon = event => {
+    if(event.key === "Enter"){
+      if(coupon.find(c => c.text === event.target.value)){
+        setDiscount(coupon[coupon.findIndex(c => c.text === event.target.value)].discount)
+      } else {
+        setDiscount(0)
+      }
+    }
+  }
+
+  useEffect(()=> {
+    setFinalPrice( () => totalAmount - (totalAmount * discount) / 100)
+  }, [discount, totalAmount])
+
 
   return (
     <Container>
@@ -265,7 +288,7 @@ const CheckoutPage = () => {
               <ListItem secondaryAction={<Typography>Free</Typography>}>
                 <ListItemText>Delivery Charge</ListItemText>
               </ListItem>
-              <ListItem secondaryAction={<Typography>10%</Typography>}>
+              <ListItem secondaryAction={<Typography>{`${discount}%`}</Typography>}>
                 <ListItemText>Discount</ListItemText>
               </ListItem>
               <Divider />
@@ -290,7 +313,17 @@ const CheckoutPage = () => {
               </ListItem>
             </List>
           </Paper>
+          <Paper sx={{p:2, mt: 2, borderTop: 2, borderColor: "primary.main"}}>
+            <Typography>Have Coupon ? put below:</Typography>
+            {coupon.map(c => (
+
+              <Typography key={c.text} sx={{color: "text.muted"}}>{c.text}</Typography>
+            ))}
+            <InputBase sx={{ pl:1,border: 1, borderColor: "primary.main", borderRadius: "15px"}} type="text" onKeyUp={checkCoupon}></InputBase>
+          </Paper>
         </Grid>
+
+
       </Grid>
     </Container>
   );
