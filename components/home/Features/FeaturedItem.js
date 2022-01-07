@@ -1,10 +1,10 @@
 import React from 'react';
 import Slider from "react-slick";
-import TrendItem from '../trending/TrendItem';
+import SingleItem from '../../singleItem/SingleItem';
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { Box, Button, Typography } from '@mui/material';
-import { useCart } from "../custom hooks/cartHook"
+import { useCart } from "../../custom hooks/cartHook"
 
 const FeaturedItem = () => {
   const {cartItem, addItem, openToastContext, toastTextContext } = useCart();
@@ -148,23 +148,7 @@ const FeaturedItem = () => {
             "price_symbol": "$",
             "price": 39.08
         },
-        {
-            "type": "search_product",
-            "name": "Wekapo Inflatable Lounger Air Sofa Hammock-Portable,Water Proof& Anti-Air Leaking Design-Ideal Couch for Backyard Lakeside Beach Traveling Camping Picnics & Music Festivals Camping Compression Sacks",
-            "image": "https://m.media-amazon.com/images/I/71P3Kf4BslL.jpg",
-            "has_prime": true,
-            "is_best_seller": true,
-            "is_amazon_choice": false,
-            "is_limited_deal": false,
-            "stars": 4.4,
-            "total_reviews": null,
-            "url": "https://www.amazon.com/Wekapo-Inflatable-Hammock-Portable-Design-Ideal-Compression/dp/B08CRJ57DY/ref=sr_1_10?keywords=accessories&qid=1640115209&s=sporting-goods&sr=1-10",
-            "availability_quantity": null,
-            "spec": {},
-            "price_string": "$39.98",
-            "price_symbol": "$",
-            "price": 39.98
-        },
+     
         {
             "type": "search_product",
             "name": "Roc Inflatable Stand Up Paddle Board with Premium sup Accessories & Backpack, Non-Slip Deck, Waterproof Bag, Leash, Paddle and Hand Pump.",
@@ -471,9 +455,9 @@ const FeaturedItem = () => {
 
           nextArrow={<NextButton />}
           prevArrow={<PrevButton />}
-          slidesToShow={4}
+          slidesToShow={5}
           slidesPerRow={3}
-          slidesToScroll={3}
+          slidesToScroll={2}
           responsive={[
             {
               breakpoint: 1200,
@@ -514,7 +498,7 @@ const FeaturedItem = () => {
           ]}
         >
           {items.map((item, index) => (
-            <TrendItem cartItem={cartItem} items={item} addItem={addItem} key={index} setOpenToast={setOpenToast} setToastText={setToastText}/>
+            <SingleItem cartItem={cartItem} items={item} addItem={addItem} key={index} setOpenToast={setOpenToast} setToastText={setToastText}/>
           ))}
         </Slider>
       </Box>

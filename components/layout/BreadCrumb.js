@@ -39,19 +39,30 @@ const BreadCrumb = () => {
       <Box sx={{ p: 2 }}>
         <Breadcrumbs separator={<ChevronRight fontSize="small" />}>
           <Link href="/" sx={{ color: "primary.main" }} passHref>
-            <a>Home</a>
+            <Box component={"a"} sx={{"&:hover": {color: "primary.main"}}}>Home</Box>
           </Link>
 
-          {breadCrumbs.map((nav) => (
-            <Link
+          {breadCrumbs.map((nav, index, array) => {
+           return (
+             <>
+             { index !== array.length -1 && (
+
+           <Link
               href={nav.url}
               sx={{ color: "primary.main" }}
               key={nav.title}
               passHref
             >
-              <a>{nav.title}</a>
+              <Box component={"a"} sx={{"&:hover": {color: "primary.main"}}}>{nav.title}</Box>
             </Link>
-          ))}
+             ) }
+             {index === array.length - 1 && (
+             <Box component={"span"} key={nav.title}>{nav.title}</Box>
+
+             )}
+             </>
+           )
+          })}
         </Breadcrumbs>
       </Box>
     );

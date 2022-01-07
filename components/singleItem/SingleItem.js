@@ -27,7 +27,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 
 
-const TrendItem = ({cartItem, items, addItem, index, setOpenToast, setToastText }) => {
+const SingleItem = ({cartItem, items, addItem, index, setOpenToast, setToastText }) => {
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -108,14 +108,20 @@ const TrendItem = ({cartItem, items, addItem, index, setOpenToast, setToastText 
   };
 
   return (
-    <Box sx={{ px: 1, mb: 5 }} key={index}>
+    <Box sx={{ px: 0, mb: {xs: 3, md:0} }} key={index}>
       <Card
         sx={{
           transition: "all 0.6s ease",
           boxShadow: 0,
+          border: 1,
+          bgcolor: "rgba(0,0,0,0.02)",
+          borderColor: "rgba(0,0,0,0.07)",
           "&:hover": {
             cursor: "pointer",
             boxShadow: 5,
+            "& img.product-image": {
+              transform: "scale(1.2, 1.2)"
+            }
           },
         }}
       >
@@ -123,11 +129,9 @@ const TrendItem = ({cartItem, items, addItem, index, setOpenToast, setToastText 
           <CardMedia
             sx={{
               transition: "all 0.6s ease",
-              "&:hover": {
-                transform: "scale(1.2, 1.2)",
-              },
             }}
             component="img"
+            className="product-image"
             height="194"
             image={items.image}
             alt="Paella dish"
@@ -217,4 +221,4 @@ const TrendItem = ({cartItem, items, addItem, index, setOpenToast, setToastText 
   );
 };
 
-export default TrendItem;
+export default SingleItem;

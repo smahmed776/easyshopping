@@ -12,10 +12,11 @@ const CartPage = () => {
         <Grid item xs={12} md={7} sx={{ px: 1 }}>
           <Container
             sx={{
-              border: 1,
-              borderColor: "primary.light",
+              borderTop:3, borderColor: "primary.main",
               p: 1,
               backgroundColor: "rgba(248,249,250)",
+              borderTopLeftRadius: "8px",
+              borderTopRightRadius:"8px"
             }}
           >
             <Grid container sx={{ justifyContent: "space-between" }}>

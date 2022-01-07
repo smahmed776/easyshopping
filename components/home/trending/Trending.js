@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
-import TrendItem from "./TrendItem";
+import SingleItem from "../../singleItem/SingleItem";
 import { Button, Box, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { useCart } from "../custom hooks/cartHook";
+import { useCart } from "../../custom hooks/cartHook";
 
 const Trending = () => {
-  const {cartItem, addItem, openToastContext, toastTextContext } = useCart();
+  const { cartItem, addItem, openToastContext, toastTextContext } = useCart();
   const [openToast, setOpenToast] = openToastContext;
   const [toastText, setToastText] = toastTextContext;
 
@@ -229,8 +229,9 @@ const Trending = () => {
           top: "-12%",
           right: "70px",
           zIndex: 1,
+          color: "white",
+          bgcolor: "primary.main",
         }}
-        color="primary"
         endIcon={<ArrowBackIosIcon />}
         onClick={onClick}
       ></Button>
@@ -241,7 +242,14 @@ const Trending = () => {
     return (
       <Button
         variant="contained"
-        sx={{ position: "absolute", boxShadow: 2, top: "-12%", right: "0" }}
+        sx={{
+          position: "absolute",
+          boxShadow: 2,
+          top: "-12%",
+          right: "0",
+          color: "white",
+          bgcolor: "primary.main",
+        }}
         color="primary"
         startIcon={<ArrowForwardIosIcon />}
         onClick={onClick}
@@ -251,24 +259,26 @@ const Trending = () => {
 
   return (
     <div
-      className="container  marketing my-4 pe-0"
-      style={{ position: "relative", minHeight: "55vh", marginTop: "1rem" }}
+      style={{ position: "relative", minHeight: "55vh", marginTop: "1.5rem" }}
     >
-      <div
-        className="d-flex justify-content-between align-items-center"
-        style={{ borderBottom: "1px solid rgb(149, 153, 149)" }}
+      <Box
+        sx={{ borderBottom: 1, borderColor: "primary.main" }}
       >
         <Typography
           variant="h6"
           sx={{
-            width: { xs: "200px", md: "auto" },
+            width: { xs: "fit-content", md: "max-content" },
             marginBottom: { xs: "3rem", sm: "0rem" },
+            bgcolor: "primary.main",
+            color: "white",
+            p: {xs:2,sm:0.5},
+            fontSize:{xs:"0.9rem", sm:"1rem"}
           }}
           component="div"
         >
           TRENDING ON EASYSHOPPING.COM
         </Typography>
-      </div>
+      </Box>
 
       <Box sx={{ py: 1 }}>
         <Slider
@@ -299,7 +309,7 @@ const Trending = () => {
               breakpoint: 768,
               settings: {
                 slidesToScroll: 1,
-                slidesToShow: 2,
+                slidesToShow: 3,
               },
             },
             {
@@ -319,7 +329,15 @@ const Trending = () => {
           ]}
         >
           {trending.map((item, index) => (
-            <TrendItem cartItem={cartItem} items={item} index={index} key={index} addItem={addItem} setOpenToast={setOpenToast} setToastText={setToastText} />
+            <SingleItem
+              cartItem={cartItem}
+              items={item}
+              index={index}
+              key={index}
+              addItem={addItem}
+              setOpenToast={setOpenToast}
+              setToastText={setToastText}
+            />
           ))}
         </Slider>
       </Box>

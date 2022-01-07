@@ -257,6 +257,7 @@ const CheckoutPage = () => {
                       loading={loading}
                       loadingPosition="start"
                       variant="contained"
+                      sx={{color:"white", bgcolor:"primary.main"}}
                     >
                       Buy Product
                     </LoadingButton>

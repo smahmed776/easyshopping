@@ -85,7 +85,7 @@ const AddressCol = ({cartItem}) => {
         />
         <div style={{padding: "1rem"}}>
           <Link href="/cart/checkout">
-            <Button variant="contained" disabled={disable} sx={{width: "100%"}}>
+            <Button variant="contained" disabled={disable} sx={{width: "100%", color: "white", bgcolor: "primary.main"}}>
                 Proceed to Checkout
             </Button>
           </Link>

@@ -8,6 +8,7 @@ import {
   Link,
   Grid,
   IconButton,
+  Divider,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import weaccept from "../../public/img/weaccept.png";
@@ -126,7 +127,7 @@ const Footer = () => {
               variant="body2"
               component={"div"}
               color="white"
-              sx={{ p: 2 }}
+              sx={{ p: 2, mt:2 }}
             >
               Yes! send me exclusive offers, unique gift ideas, personalized
               tips for shopping and selling on imponexpo
@@ -138,17 +139,18 @@ const Footer = () => {
                 inputProps={{ "aria-label": "enter email" }}
               />
               <SearchIconWrapper>
-                <Button variant="contained" sx={{ borderRadius: "1.2rem" }}>
+                <Button variant="contained" sx={{ borderRadius: "1.2rem", bgcolor: "primary.dark", color:"white" }}>
                   Subscribe
                 </Button>
               </SearchIconWrapper>
             </Search>
           </Box>
+            <Divider sx={{my: 3}} />
 
           <Grid
             container
             spacing={3}
-            sx={{ justifyContent: "flex-start", p: 1 }}
+            sx={{ justifyContent: {xs: "flex-start", sm: "center"}, p: 1 }}
           >
             {FooterLinks.map((i, index) => (
               <Grid item key={index}>

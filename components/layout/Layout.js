@@ -49,16 +49,18 @@ const Layout = ({ children }) => {
     position: "relative",
     border: "1px solid",
     borderColor: "rgba(0, 0, 0, 0.08)",
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: "8px",
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     "&:hover": {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
     marginLeft: 0,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
+      marginLeft: theme.spacing(7),
+      marginRight: theme.spacing(7),
+ 
       width: "100%",
     },
   }));
@@ -70,8 +72,16 @@ const Layout = ({ children }) => {
     alignItems: "center",
     justifyContent: "center",
     borderRight: "1px solid rgba(0,0,0,0.08)",
-    backgroundColor: "rgba(0,0,0,0.09)",
-    borderRadius: 0,
+    backgroundColor: theme.palette.primary.main,
+    color: "white",
+    borderTopLeftRadius: "8px",
+    borderBottomLeftRadius:"8px",
+    borderTopRightRadius:0,
+    borderBottomRightRadius:0,
+    "&:hover":{
+      color:"white",
+      backgroundColor: theme.palette.primary.dark
+    }
   }));
 
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -119,7 +129,7 @@ const Layout = ({ children }) => {
       <Box
         sx={{
           bgcolor: "secondary.light",
-          p: 1,
+          p: 0.5,
           display: "flex",
           justifyContent: "space-around",
           alignItems: "center",
@@ -167,7 +177,7 @@ const Layout = ({ children }) => {
       </Box>
       <AppBar
         position="sticky"
-        sx={{ bgcolor: "white", color: "black", boxShadow: 0 }}
+        sx={{ bgcolor: "white", color: "black", boxShadow: 0, borderBottom: 1, borderColor: "rgba(0,0,0,0.3)" }}
       >
         <Toolbar sx={{ alignItems: "center", height: "75px" }}>
           <IconButton
@@ -189,6 +199,9 @@ const Layout = ({ children }) => {
                 sx={{
                   display: { xs: "none", sm: "block" },
                   fontFamily: "serif",
+                  "&:hover":{
+                    color:"primary.main"
+                  }
                 }}
               >
                 EasyShopping
